@@ -4,8 +4,11 @@ FROM node:20
 # Set working directory
 WORKDIR /app
 
-# Install OpenClaw globally
-RUN npm install -g openclawd
+# Install OpenClaw using the official installer
+RUN curl -fsSL https://openclaw.ai/install.sh | bash
+
+# Add openclaw to PATH
+ENV PATH="/root/.openclaw/bin:${PATH}"
 
 # Create openclaw directory
 RUN mkdir -p /root/.openclaw
