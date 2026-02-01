@@ -14,5 +14,17 @@ if [ ! -z "$DEVICE_AUTH_JSON" ]; then
   echo "$DEVICE_AUTH_JSON" > /root/.openclaw/identity/device-auth.json
 fi
 
-# Start OpenClaw
-exec openclawd start
+# Try multiple ways to run openclawd
+if command -v openclawd &> /dev/null; then
+    echo "Found openclawd in PATH"
+    exec openclawd start
+elif [ -f "/usr/local/bin/openclawd" ]; then
+    echo "Found openclawd in /usr/local/bin"
+    exec /usr/local/bin/openclawd start
+elif [ -f "/usr/local/lib/node_modules/openclawd/bin/openclawd" ]; then
+    echo "Found openclawd in node_modules"
+    exec /usr/local/lib/node_modules/openclawd/bin/openclawd start
+else
+    echo "Trying to run via npx..."
+    exec npx openclawd start
+fi

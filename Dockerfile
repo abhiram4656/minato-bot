@@ -1,11 +1,14 @@
-# Use official Node.js runtime
-FROM node:20
+# Use official Node.js runtime with version 22 (OpenClaw requires 22+)
+FROM node:22
 
 # Set working directory
 WORKDIR /app
 
 # Install OpenClaw globally via npm
 RUN npm install -g openclawd@latest
+
+# Verify installation and find the binary
+RUN which openclawd || find /usr -name openclawd || npm list -g openclawd
 
 # Create openclaw directory
 RUN mkdir -p /root/.openclaw
