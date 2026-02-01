@@ -1,0 +1,14 @@
+{
+  "gateway": {
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022"
+  },
+  "telegram": {
+    "enabled": true,
+    "token": "USE_ENV_VAR"
+  },
+  "identity": {
+    "name": "Your Bot Name",
+    "emoji": "🤖"
+  }
+}
