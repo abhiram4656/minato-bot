@@ -4,13 +4,14 @@
 sed -i "s/\${TELEGRAM_BOT_TOKEN}/$TELEGRAM_BOT_TOKEN/g" /root/.openclaw/openclaw.json
 sed -i "s/\${GATEWAY_TOKEN}/$GATEWAY_TOKEN/g" /root/.openclaw/openclaw.json
 
-# Copy agent files if they exist
-if [ -d "/app/agents" ]; then
-  cp -r /app/agents /root/.openclaw/
+# Create auth-profiles.json from environment variable if provided
+if [ ! -z "$AUTH_PROFILES_JSON" ]; then
+  echo "$AUTH_PROFILES_JSON" > /root/.openclaw/agents/main/agent/auth-profiles.json
 fi
 
-if [ -d "/app/identity" ]; then
-  cp -r /app/identity /root/.openclaw/
+# Create device-auth.json from environment variable if provided
+if [ ! -z "$DEVICE_AUTH_JSON" ]; then
+  echo "$DEVICE_AUTH_JSON" > /root/.openclaw/identity/device-auth.json
 fi
 
 # Start OpenClaw

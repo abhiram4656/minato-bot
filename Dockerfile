@@ -20,9 +20,13 @@ RUN mkdir -p /root/.openclaw
 COPY openclaw.json /root/.openclaw/openclaw.json
 COPY start.sh /app/start.sh
 
-# Copy agent workspace files
+# Copy agent workspace files (excluding sensitive auth files)
 COPY agents /root/.openclaw/agents
-COPY identity /root/.openclaw/identity
+COPY identity/device.json /root/.openclaw/identity/device.json
+
+# Create directories for auth files (will be populated from env vars)
+RUN mkdir -p /root/.openclaw/agents/main/agent
+RUN mkdir -p /root/.openclaw/identity
 
 # Make start script executable
 RUN chmod +x /app/start.sh
