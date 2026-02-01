@@ -1,11 +1,5 @@
-# Use Node.js LTS
-FROM node:20-alpine
-
-# Install dependencies
-RUN apk add --no-cache \
-    curl \
-    git \
-    bash
+# Use official Node.js runtime
+FROM node:20
 
 # Set working directory
 WORKDIR /app
