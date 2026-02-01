@@ -1,11 +1,11 @@
 # Use Node.js LTS
-FROM node:20-slim
+FROM node:20-alpine
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
     curl \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    bash
 
 # Set working directory
 WORKDIR /app
