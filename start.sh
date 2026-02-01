@@ -14,14 +14,5 @@ if [ ! -z "$DEVICE_AUTH_JSON" ]; then
   echo "$DEVICE_AUTH_JSON" > /root/.openclaw/identity/device-auth.json
 fi
 
-# Find and run openclawd
-if command -v openclawd &> /dev/null; then
-    openclawd start
-elif [ -f "/root/.openclaw/bin/openclawd" ]; then
-    /root/.openclaw/bin/openclawd start
-elif [ -f "/usr/local/bin/openclawd" ]; then
-    /usr/local/bin/openclawd start
-else
-    echo "Error: openclawd not found"
-    exit 1
-fi
+# Start OpenClaw
+exec openclawd start
